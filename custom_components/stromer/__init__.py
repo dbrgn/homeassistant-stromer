@@ -66,6 +66,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # Set up platforms (i.e. sensors, binary_sensors)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
+    # Close web session
+    await stromer.stromer_disconnect()
+
     return True
 
 

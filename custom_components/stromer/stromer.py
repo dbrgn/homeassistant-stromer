@@ -27,6 +27,8 @@ class Stromer:
             self._api_version = "v3"
         self.base_url: str = "https://api3.stromer-portal.ch"
 
+        LOGGER.debug("Initializing Stromer with API version %s", self._api_version)
+
         self._timeout: int = timeout
         self._username: str = username
         self._password: str = password
@@ -60,6 +62,11 @@ class Stromer:
         LOGGER.debug("Stromer connected!")
 
         return self.status
+
+    async def stromer_disconnect(self) -> None:
+        """Close API web session."""
+        LOGGER.debug("Closing aiohttp session")
+        await self._websession.close()
 
     async def stromer_update(self) -> None:
         """Update stromer data through API."""
